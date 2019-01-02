@@ -1,5 +1,3 @@
-'use strict';
-
 // import DataElement from './DataElement';
 
 class MessageMappingGuide {
