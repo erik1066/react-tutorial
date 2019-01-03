@@ -4,17 +4,17 @@ class HL7Parser {
 
         const normalizedMessage = message.replace(/(\r\n\t|\n|\r\t)/gm, "\n"); // normalize line terminators
         const elements = messageMappingGuide.elements;
-        const segments = normalizedMessage.split("\n");
 
         elements.forEach(element => {
-            this.findSegmentData(element, segments);
+            this.findSegmentData(element, normalizedMessage, messageMappingGuide);
         });
     }
 
-    findSegmentData(element, segments) {
+    findSegmentData(element, message, messageMappingGuide) {
         const segmentType = element.mappings[0].segmentType;
         const fieldPosition = element.mappings[0].fieldPosition;
         const identifier = element.identifier;
+        const segments = message.split("\n");
 
         const segmentData = {
             name: element.name,
@@ -31,11 +31,22 @@ class HL7Parser {
                 let data = null;
 
                 if (segmentType === "OBX" && fieldPosition === 5) {
-                    
                     let obx3value = fields[3];
                     const obx3components = obx3value.split('^');
                     if (identifier === obx3components[0]) {
                         data = fields[5];
+                    }
+                }
+                else if (segmentType === "OBX" && fieldPosition > 5 && element.relatedElementId) {
+                    const relatedId = element.relatedElementId;
+                    const relatedElement = this.getElementById(relatedId, messageMappingGuide);
+                    const relatedElementIdentifier = relatedElement.identifier;
+                    
+                    let obx3value = fields[3];
+                    const obx3components = obx3value.split('^');
+                    
+                    if (relatedElementIdentifier === obx3components[0]) {
+                        data = fields[fieldPosition];
                     }
                 }
                 else if (segmentType !== "OBX") {
@@ -55,6 +66,19 @@ class HL7Parser {
         return segmentData;
     }
 
+    getElementById(id, messageMappingGuide) {
+        const elements = messageMappingGuide.elements;
+
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            if (element.id && element.id === id) {
+                return element;
+            }
+        }
+
+        return null;
+    }
+
     generateFriendlyValue(element, value) {
 
         const mapping = element.mappings[0];
@@ -64,9 +88,13 @@ class HL7Parser {
             return friendlyValue;
         }
 
-        if (mapping.dataType === "CWE") {
+        if (mapping.dataType === "CWE" || mapping.dataType === "CE") {
             const components = value.split('^');
             friendlyValue = components[0] + "=" + components[1];
+        }
+        else if (mapping.dataType === "SN") {
+            const components = value.split('^');
+            friendlyValue = components[1];
         }
         else {
             friendlyValue = value;

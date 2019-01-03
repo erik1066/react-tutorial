@@ -20,7 +20,6 @@ const TableBody = (props) => {
         return (
             <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{row.condition}</td>
                 <td>{row.legacyVariableName}</td>
                 <td>{row.name}</td>
                 <td>{row.identifier}</td>
@@ -44,7 +43,6 @@ const TableHeader = () => {
         <thead>
             <tr>
                 <th>Row</th>
-                <th>Cn</th>
                 <th>Legacy</th>
                 <th>Data element name</th>
                 <th>Identifier</th>
