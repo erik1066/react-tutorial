@@ -28,6 +28,13 @@ const TableBody = (props) => {
                 <td>{row.dataType}</td>
                 <td>{row.priority}</td>
                 <td>{row.repetitions}</td>
+                <td>{row.data[0]}</td>
+                <td>{row.data[1]}</td>
+                <td>{row.data[3]}</td>
+                <td>{row.data[4]}</td>
+                <td>{row.data[5]}</td>
+                <td>{row.data[6]}</td>
+                <td>{row.data[7]}</td>
             </tr>
         );
     })
@@ -44,13 +51,20 @@ const TableHeader = () => {
             <tr>
                 <th>Row</th>
                 <th>Legacy</th>
-                <th>Data element name</th>
+                <th>Name</th>
                 <th>Identifier</th>
                 <th>Code system</th>
                 <th>Description</th>
                 <th>Data type</th>
                 <th>Priority</th>
                 <th>Repetitions</th>
+                <th>Test Record #1</th>
+                <th>Test Record #2</th>
+                <th>Test Record #3</th>
+                <th>Test Record #4</th>
+                <th>Test Record #5</th>
+                <th>Test Record #6</th>
+                <th>Test Record #7</th>
             </tr>
         </thead>
     );

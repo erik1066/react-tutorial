@@ -8,7 +8,7 @@ import HL7Parser from './HL7Parser';
 class App extends Component {
 
   state = {
-    messageMappingGuide: new MessageMappingGuide("Generic V2", [
+    messageMappingGuide: new MessageMappingGuide("Generic V2 20171208", [
       {
         name: "Local Subject ID",
         description: "The local ID of the subject/entity",

@@ -6,7 +6,12 @@ class HL7Parser {
         const elements = messageMappingGuide.elements;
 
         elements.forEach(element => {
-            this.findSegmentData(element, normalizedMessage, messageMappingGuide);
+            const data = this.findSegmentData(element, normalizedMessage, messageMappingGuide);
+            if (!element.data) {
+                element.data = [];
+            } 
+            
+            element.data.push(data.friendlyValue);
         });
     }
 
