@@ -4,11 +4,43 @@ import './App.css';
 import Table from './Table';
 import MessageMappingGuide from './MessageMappingGuide';
 import HL7Parser from './HL7Parser';
+import HL7Form from './HL7Form';
 
 class App extends Component {
 
   state = {
-    messageMappingGuide: new MessageMappingGuide("Generic V2 20171208", [
+    messageMappingGuide: new MessageMappingGuide("Congenital Syphillis 20180119", 
+    [
+      {
+        name: "Message Profile Identifier",
+        description: "Message Profile Identifiers provide a literal value to use for the references in MSH-21.  MSH-21 will always contain a reference to the notification type in the \"PHINProfileID\" namespace and a reference to the implemented version of the Generic MMG in the \"PHINMsgMapID\" namespace.  For conditions that have a condition-specific MMG, MSH-21 will also contain a reference to that MMG that is also in the \"PHINMsgMapID\" namespace.",
+        legacyVariableName: "NOT115",
+        identifier: "N/A: MSH-21",
+        codeSystem: "N/A",
+        dataType: "Text",
+        priority: "R",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "MSH",
+            fieldPosition: 21,
+            componentPosition: null,
+            dataType: "EI",
+            usage: "R",
+            cardinality: "[3..3]",
+            repeatingGroupElement: "NO"
+          }
+        ]
+      },
+
+      {
+        name: "Subject Related",
+        dataType: "Header",
+        mappings: []
+      },
+
       {
         name: "Local Subject ID",
         description: "The local ID of the subject/entity",
@@ -124,6 +156,31 @@ class App extends Component {
           }
         ]
       },
+
+      {
+        name: "Ethnic Group",
+        description: "Based on the self-identity of the subject as Hispanic or Latino ",
+        legacyVariableName: "DEM155",
+        identifier: "N/A: PID-22",
+        codeSystem: "N/A",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "PID",
+            fieldPosition: 22,
+            componentPosition: null,
+            dataType: "CE",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "NO"
+          }
+        ]
+      },
+
       {
         name: "Country of Birth",
         description: "Country of Birth",
@@ -147,6 +204,140 @@ class App extends Component {
           }
         ]
       },
+
+      {
+        name: "Other Birth Place",
+        description: "Other Birth Place",
+        legacyVariableName: "DEM304",
+        identifier: "21842-0",
+        codeSystem: "LN",
+        dataType: "Text",
+        priority: "O",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "OBX",
+            fieldPosition: 5,
+            componentPosition: null,
+            dataType: "ST",
+            usage: "O",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "NO"
+          }
+        ]
+      },
+
+      {
+        name: "Country of Usual Residence",
+        description: "Where does the person usually live (defined as their residence).",
+        legacyVariableName: "INV501",
+        identifier: "77983-5",
+        codeSystem: "LN",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "OBX",
+            fieldPosition: 5,
+            componentPosition: null,
+            dataType: "CWE",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "NO"
+          }
+        ]
+      },
+
+      {
+        name: "Subject Address County",
+        description: "County of residence of the subject",
+        legacyVariableName: "DEM165",
+        identifier: "N/A: PID-11.9",
+        codeSystem: "N/A",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "PID",
+            fieldPosition: 11,
+            componentPosition: 9,
+            dataType: "IS",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "NO"
+          }
+        ]
+      },
+
+      {
+        name: "Subject Address State",
+        description: "State of residence of the subject",
+        legacyVariableName: "DEM162",
+        identifier: "N/A: PID-11.4",
+        codeSystem: "N/A",
+        dataType: "Coded",
+        priority: "O",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "PID",
+            fieldPosition: 11,
+            componentPosition: 4,
+            dataType: "ST",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "NO"
+          }
+        ]
+      },
+
+
+      {
+        name: "Subject Address ZIP Code",
+        description: "ZIP Code of residence of the subject",
+        legacyVariableName: "DEM163",
+        identifier: "N/A: PID-11.5",
+        codeSystem: "N/A",
+        dataType: "Coded",
+        priority: "O",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "PID",
+            fieldPosition: 11,
+            componentPosition: 5,
+            dataType: "ST",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "NO"
+          }
+        ]
+      },
+
+
+
+
+      {
+        name: "Case Related",
+        dataType: "Header",
+        mappings: []
+      },
+
+
+
+
       {
         id: "ce6cd7c0-f9c8-44d2-a917-91e1655ad5bd",
         name: "Illness Duration",
@@ -195,69 +386,391 @@ class App extends Component {
             repeatingGroupElement: "NO"
           }
         ]
+      },
+
+      {
+        id: "97f3083c-fdca-4f94-a218-21478312c543",
+        name: "Epidemiologic Lab Interpretative questions repeating group - Mother's First Non-Treponemal Test Finding/Information",
+        description: "",
+        dataType: "Header",
+        mappings: []
+      },
+
+      {
+        id: "0e0e47a3-0b0e-4fc9-8a38-5a8c59897c92",
+        name: "Lab Test Performed Modifier",
+        description: "Lab Test Performed Modifier to convey whether this result is for the first or most recent test as well as the subject (Mother or Infant).",
+        instance: 1,
+        legacyVariableName: "LAB588",
+        identifier: "LAB588",
+        codeSystem: "PHINQUESTION",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "OBX",
+            fieldPosition: 5,
+            componentPosition: null,
+            dataType: "CWE",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "PRIMARY/PARENT"
+          }
+        ]
+      },
+      {
+        id: "8d792c5e-5e2d-41e0-a797-2d38696fd3b2",
+        name: "Test Type",
+        description: "Epidemiologic interpretation of the type of test(s) performed for this case.",
+        instance: 1,
+        legacyVariableName: "INV290",
+        identifier: "INV290",
+        codeSystem: "PHINQUESTION",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "OBX",
+            fieldPosition: 5,
+            componentPosition: null,
+            dataType: "CWE",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "PRIMARY/PARENT"
+          }
+        ]
+      },
+      {
+        id: "2f1b8a3c-fc2b-42d4-bc2d-a21cc3782a12",
+        name: "Test Result",
+        description: "Epidemiologic interpretation of the results of the test(s) performed for this case. This is a qualitative test result.  E.g. positive, detected, negative.",
+        instance: 1,
+        legacyVariableName: "INV291",
+        identifier: "INV291",
+        codeSystem: "PHINQUESTION",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "OBX",
+            fieldPosition: 5,
+            componentPosition: null,
+            dataType: "CWE",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "CHILD"
+          }
+        ]
+      },
+
+
+      {
+        id: "953418f8-1487-46b5-8918-94be49031b32",
+        name: "Epidemiologic Lab Interpretative questions repeating group - Mother's First Non-Treponemal Test Finding/Information",
+        description: "",
+        dataType: "Header",
+        mappings: []
+      },
+
+
+      {
+        id: "c034e07e-f200-438f-a87e-f5f66e673bf8",
+        name: "Lab Test Performed Modifier",
+        description: "Lab Test Performed Modifier to convey whether this result is for the first or most recent test as well as the subject (Mother or Infant).",
+        instance: 2,
+        legacyVariableName: "LAB588",
+        identifier: "LAB588",
+        codeSystem: "PHINQUESTION",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "OBX",
+            fieldPosition: 5,
+            componentPosition: null,
+            dataType: "CWE",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "PRIMARY/PARENT"
+          }
+        ]
+      },
+      {
+        id: "6f9c639e-bddf-4875-abdf-ef288eba5caa",
+        name: "Test Type",
+        description: "Epidemiologic interpretation of the type of test(s) performed for this case.",
+        instance: 2,
+        legacyVariableName: "INV290",
+        identifier: "INV290",
+        codeSystem: "PHINQUESTION",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "OBX",
+            fieldPosition: 5,
+            componentPosition: null,
+            dataType: "CWE",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "PRIMARY/PARENT"
+          }
+        ]
+      },
+      {
+        id: "b1eeea24-f218-4121-b32f-f5a676d06094",
+        name: "Test Result",
+        description: "Epidemiologic interpretation of the results of the test(s) performed for this case. This is a qualitative test result.  E.g. positive, detected, negative.",
+        instance: 2,
+        legacyVariableName: "INV291",
+        identifier: "INV291",
+        codeSystem: "PHINQUESTION",
+        dataType: "Coded",
+        priority: "P",
+        repetitions: 1,
+        mappings: [
+          {
+            name: "hl7-v251-oru-r01",
+            obrParent: 1,
+            segmentType: "OBX",
+            fieldPosition: 5,
+            componentPosition: null,
+            dataType: "CWE",
+            usage: "RE",
+            cardinality: "[0..1]",
+            repeatingGroupElement: "CHILD"
+          }
+        ]
       }
+
+    // messageMappingGuide: new MessageMappingGuide("Generic V2 20171208", 
+    // [
+    //   {
+    //     name: "Local Subject ID",
+    //     description: "The local ID of the subject/entity",
+    //     legacyVariableName: "DEM197",
+    //     identifier: "N/A: PID-3",
+    //     codeSystem: "N/A",
+    //     dataType: "Text",
+    //     priority: "R",
+    //     repetitions: 1,
+    //     mappings: [
+    //       {
+    //         name: "hl7-v251-oru-r01",
+    //         obrParent: 1,
+    //         segmentType: "PID",
+    //         fieldPosition: 3,
+    //         componentPosition: null,
+    //         dataType: "ST",
+    //         usage: "R",
+    //         cardinality: "[1..1]",
+    //         repeatingGroupElement: "NO"
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     name: "Birth Date",
+    //     description: "Patient’s date of birth",
+    //     legacyVariableName: "DEM115",
+    //     identifier: "N/A: PID-7",
+    //     codeSystem: "N/A",
+    //     dataType: "Date",
+    //     priority: "P",
+    //     repetitions: 1,
+    //     mappings: [
+    //       {
+    //         name: "hl7-v251-oru-r01",
+    //         obrParent: 1,
+    //         segmentType: "PID",
+    //         fieldPosition: 7,
+    //         componentPosition: null,
+    //         dataType: "TS",
+    //         usage: "RE",
+    //         cardinality: "[0..1]",
+    //         repeatingGroupElement: "NO"
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     name: "Subject's Sex",
+    //     description: "Subject's current sex",
+    //     legacyVariableName: "DEM113",
+    //     identifier: "N/A: PID-8",
+    //     codeSystem: "N/A",
+    //     dataType: "Coded",
+    //     priority: "P",
+    //     repetitions: 1,
+    //     mappings: [
+    //       {
+    //         name: "hl7-v251-oru-r01",
+    //         obrParent: 1,
+    //         segmentType: "PID",
+    //         fieldPosition: 8,
+    //         componentPosition: null,
+    //         dataType: "IS",
+    //         usage: "RE",
+    //         cardinality: "[0..1]",
+    //         repeatingGroupElement: "NO"
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     name: "Race Category",
+    //     description: "Race category - Major OMB Race Categories. Detailed race information would be rolled up to these major OMB race categories.",
+    //     legacyVariableName: "DEM152",
+    //     identifier: "N/A: PID-10",
+    //     codeSystem: "N/A",
+    //     dataType: "Coded",
+    //     priority: "P",
+    //     repetitions: 100000,
+    //     mappings: [
+    //       {
+    //         name: "hl7-v251-oru-r01",
+    //         obrParent: 1,
+    //         segmentType: "PID",
+    //         fieldPosition: 10,
+    //         componentPosition: null,
+    //         dataType: "CE",
+    //         usage: "RE",
+    //         cardinality: "[0..*]",
+    //         repeatingGroupElement: "NO"
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     name: "Other Race Text",
+    //     description: "Other Race Text",
+    //     legacyVariableName: "DEM154",
+    //     identifier: "32624-9",
+    //     codeSystem: "LN",
+    //     dataType: "Text",
+    //     priority: "O",
+    //     repetitions: 1,
+    //     mappings: [
+    //       {
+    //         name: "hl7-v251-oru-r01",
+    //         obrParent: 1,
+    //         segmentType: "OBX",
+    //         fieldPosition: 5,
+    //         componentPosition: null,
+    //         dataType: "ST",
+    //         usage: "O",
+    //         cardinality: "[0..1]",
+    //         repeatingGroupElement: "NO"
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     name: "Country of Birth",
+    //     description: "Country of Birth",
+    //     legacyVariableName: "DEM126",
+    //     identifier: "78746-5",
+    //     codeSystem: "LN",
+    //     dataType: "Coded",
+    //     priority: "P",
+    //     repetitions: 1,
+    //     mappings: [
+    //       {
+    //         name: "hl7-v251-oru-r01",
+    //         obrParent: 1,
+    //         segmentType: "OBX",
+    //         fieldPosition: 5,
+    //         componentPosition: null,
+    //         dataType: "CWE",
+    //         usage: "RE",
+    //         cardinality: "[0..1]",
+    //         repeatingGroupElement: "NO"
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     id: "ce6cd7c0-f9c8-44d2-a917-91e1655ad5bd",
+    //     name: "Illness Duration",
+    //     description: "Length of time this subject had this disease or condition.",
+    //     legacyVariableName: "INV139",
+    //     identifier: "77977-7",
+    //     codeSystem: "LN",
+    //     dataType: "Numeric",
+    //     priority: "O",
+    //     repetitions: 1,
+    //     mappings: [
+    //       {
+    //         name: "hl7-v251-oru-r01",
+    //         obrParent: 1,
+    //         segmentType: "OBX",
+    //         fieldPosition: 5,
+    //         componentPosition: null,
+    //         dataType: "SN",
+    //         usage: "O",
+    //         cardinality: "[0..1]",
+    //         repeatingGroupElement: "NO"
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     id: "7576d936-0aa5-4e98-b330-f40af2145c78",
+    //     name: "Illness Duration Units",
+    //     description: "Unit of time used to describe the length of the illness or condition.",
+    //     legacyVariableName: "INV140",
+    //     identifier: "N/A: OBX-6",
+    //     codeSystem: "N/A",
+    //     dataType: "Coded",
+    //     priority: "O",
+    //     repetitions: 1,
+    //     relatedElementId: "ce6cd7c0-f9c8-44d2-a917-91e1655ad5bd",
+    //     mappings: [
+    //       {
+    //         name: "hl7-v251-oru-r01",
+    //         obrParent: 1,
+    //         segmentType: "OBX",
+    //         fieldPosition: 6,
+    //         componentPosition: null,
+    //         dataType: "CE",
+    //         usage: "O",
+    //         cardinality: "[0..1]",
+    //         repeatingGroupElement: "NO"
+    //       }
+    //     ]
+    //   }
     ])
   };
 
+  handleSubmit = (file) => {
+
+    const { messageMappingGuide } = this.state;
+
+    const data = file;
+    new HL7Parser().parse(data.message, messageMappingGuide);
+
+    this.setState({
+      messageMappingGuide: messageMappingGuide
+    });
+  }
+
   render() 
   {
-    const message = 
-`MSH|^~\&|SendAppName^2.16.840.1.114222.nnnn^ISO|Sending-Facility^2.16.840.1.114222.nnnn^ISO|PHINCDS^2.16.840.1.114222.4.3.2.10^ISO|PHIN^2.16.840.1.114222^ISO|20141225120030.1234-0500||ORU^R01^ORU_R01|TM_CN_TC01_GENV2|T|2.5.1|||||||||NOTF_ORU_v3.0^PHINProfileID^2.16.840.1.114222.4.10.3^ISO~Generic_MMG_V2.0^PHINMsgMapID^2.16.840.1.114222.4.10.4^ISO
-PID|1||GenV2_TC01^^^SendAppName&2.16.840.1.114222.nnnn&ISO||~^^^^^^S||19640502|F||2106-3^White^CDCREC^C^Caucasian^L|^^^48^77018^^^^48201|||||||||||2135-2^Hispanic or Latino^CDCREC|||||||20140302
-OBR|1|""|GenV2_TC01^SendAppName^2.16.840.1.114222.nnnn^ISO|68991-9^Epidemiologic Information^LN|||20140227170100|||||||||||||||20140227170100|||F||||||11550^Hemolytic uremic syndrome postdiarrheal^NND
-OBX|1|ST|32624-9^Other Race Text^LN||Apache||||||F
-OBX|2|CWE|78746-5^Country of Birth^LN||USA^United States^ISO3166_1||||||F
-OBX|3|CWE|77983-5^Country of Usual Residence^LN||USA^United States^ISO3166_1||||||F
-OBX|4|TS|11368-8^Date of Illness Onset^LN||20140224||||||F
-OBX|5|TS|77976-9^Illness End Date^LN||20140302||||||F
-OBX|6|SN|77977-7^Illness Duration^LN||^6|d^day^UCUM|||||F
-OBX|7|CWE|77996-7^Pregnancy Status^LN||N^No^HL70136||||||F
-OBX|8|TS|77975-1^Diagnosis Date^LN||20140225||||||F
-OBX|9|CWE|77974-4^Hospitalized^LN||Y^Yes^HL70136||||||F
-OBX|10|TS|8656-1^Admission Date^LN||20140226||||||F
-OBX|11|TS|8649-6^Discharge Date^LN||20140302||||||F
-OBX|12|SN|78033-8^Duration of Stay in days^LN||^4|d^day^UCUM|||||F
-OBX|13|CWE|77978-5^Subject Died^LN||Y^Yes^HL70136||||||F
-OBX|14|ST|77993-4^State Case Id^LN||TX4321||||||F
-OBX|15|ST|77997-5^Legacy Case ID^LN||48432148S012014||||||F
-OBX|16|SN|77998-3^Age at Case Investigation^LN||^49|a^year^UCUM|||||F
-OBX|17|CWE|77982-7^Case Disease Imported Code^LN||C1512888^International^UML||||||F
-OBX|18|CWE|INV153^Imported Country^PHINQUESTION||MEX^Mexico^ISO3166_1||||||F
-OBX|19|CWE|77984-3^Country of Exposure or Country Where Disease was Acquired^LN|1|USA^United States^ISO3166_1||||||F
-OBX|20|CWE|77985-0^State or Province of Exposure^LN|1|48^Texas^FIPS5_2||||||F
-OBX|21|ST|77986-8^City of Exposure^LN|1|Houston||||||F
-OBX|22|ST|77987-6^County of Exposure^LN|1|Harris||||||F
-OBX|23|CWE|77989-2^Transmission Mode^LN||416086007^Foodborne Transmission^SCT||||||F
-OBX|24|CWE|77990-0^Case Class Status Code^LN||410605003^Confirmed Present^SCT||||||F
-OBX|25|CWE|77965-2^Immediate National Notifiable Condition^LN||N^No^HL70136||||||F
-OBX|26|CWE|77980-1^Case Outbreak Indicator^LN||Y^Yes^HL70136||||||F
-OBX|27|ST|77981-9^Case Outbreak Name^LN||HANSENOUTB1||||||F
-OBX|28|ST|77969-4^Jurisdiction Code^LN||S01||||||F
-OBX|29|CWE|48766-0^Reporting Source Type Code^LN||1^Hospital^HL70406||||||F
-OBX|30|ST|52831-5^Reporting Source Zip Code^LN||77018||||||F
-OBX|31|CWE|77988-4^Binational Reporting Criteria^LN||PHC1140^Exposure to a suspected product from Mexico or Canada^CDCPHINVS||||||F
-OBX|32|ST|74549-7^Person Reporting to CDC - Name^LN||Smith, John||||||F
-OBX|33|ST|74548-9^Person Reporting to CDC - Phone Number^LN||(444)321-1234||||||F
-OBX|34|ST|74547-1^Person Reporting to CDC - Email^LN||jsmith@txdoh.org||||||F
-OBX|35|DT|77979-3^Investigation Start Date^LN||20140225||||||F
-OBX|36|DT|77995-9^Date Reported^LN||20140225||||||F
-OBX|37|TS|77972-8^Earliest Date reported to county^LN||20140225||||||F
-OBX|38|TS|77973-6^Earliest Date reported to State^LN||20140225||||||F
-OBX|39|SN|77991-8^MMWR Week^LN||^9||||||F
-OBX|40|DT|77992-6^MMWR Year^LN||2014||||||F
-OBX|41|DT|77994-2^Date CDC Was First Verbally Notified of This Case^LN||20140225||||||F
-OBX|42|DT|77970-2^Date First Reported to PHD^LN||20140225||||||F
-OBX|43|CWE|77966-0^Reporting State^LN||48^Texas^FIPS5_2||||||F
-OBX|44|CWE|77967-8^Reporting County^LN||48201^Harris, TX^FIPS6_4||||||F
-OBX|45|CWE|77968-6^National Reporting Jurisdiction^LN||48^Texas^FIPS5_2||||||F
-OBX|46|TX|77999-1^Comment Field^LN||||||||F`;
     const messageMappingGuide = this.state.messageMappingGuide;
-
-    const result = new HL7Parser().parse(message, messageMappingGuide);
 
     return (
       <div className="container">
         <h1>{messageMappingGuide.name}</h1>
+        <br />
+        <HL7Form handleSubmit={this.handleSubmit} />
         <br />
         <Table messageMappingGuide={messageMappingGuide} />
       </div>

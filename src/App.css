@@ -183,6 +183,7 @@ html {
   font-size: 1rem; }
 
 body {
+  font-family: 'Open Sans';
   color: #404040;
   background: white;
   font-size: 1rem; }
@@ -328,13 +329,13 @@ dd {
   padding: 0 1rem; }
 
 .container, .small-container, .medium-container {
-  max-width: 1200px;
+  max-width: 1800px;
   padding: 0 1rem;
   margin-left: auto;
   margin-right: auto; }
 
 .small-container {
-  max-width: 800px; }
+  max-width: 1600px; }
 
 .medium-container {
   max-width: 1000px; }
@@ -626,26 +627,28 @@ textarea.has-error:active {
 
 /* Tables
   =============== */
-table {
-  border-collapse: collapse;
-  font-size: 0.85rem;
-  border-spacing: 0;
-  width: 100%;
-  max-width: 100%; }
-
-thead th {
-  border-bottom: 2px solid #dedede; }
-
-tfoot th {
-  border-top: 2px solid #dedede; }
-
-td {
-  border-bottom: 1px solid #dedede; }
-
-th,
-td {
-  text-align: left;
-  padding: .5rem; }
+  table {
+    border: 1px solid rgb(233,233,233);
+    border-collapse: collapse;
+}
+    table > tbody > tr > td {
+        vertical-align: middle;
+        padding-left: 4px;
+        padding-right: 4px;
+        font-size: 12px;
+        color: rgb(85,85,85);
+        font-weight: 600;
+        border: 1px solid rgb(233,233,233);
+        
+    }
+    table > thead > tr > th {
+        font-weight: 700;
+        padding: 3px;
+        font-size: 12px;
+        background-color: rgb(221,224,226);
+        color: rgb(85,85,85);
+        
+    }
 
 caption {
   padding: 1rem 0;
