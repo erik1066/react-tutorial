@@ -1062,7 +1062,7 @@ class App extends Component {
       {
         "id": "e4ef9c62-bb10-4908-a218-5381b10dcd2e",
         "name": null,
-        "description": "Misc",
+        "description": "End of Repeating Variables for Disease Exposure",
         "legacyVariableName": null,
         "identifier": null,
         "codeSystem": null,
@@ -2402,6 +2402,16 @@ class App extends Component {
 
 
 
+      {
+        "name": null,
+        "description": "END: Maternal Laboratory Interpretive Information",
+        "dataType": "None",
+        "repetitions": 0,
+        "mappings": []
+      },
+
+      
+
 
       {
         "id": "4a79876d-b221-4c39-bfec-c59890289af9",
@@ -2545,6 +2555,13 @@ class App extends Component {
             "name": "hl7-v251-oru-r01"
           }
         ]
+      },
+      {
+        "name": null,
+        "description": "END: Epidemiologic Lab Interpretative questions repeating group - Mother's First Non-Treponemal Test Finding/Information [1st instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 0,
+        "mappings": []
       },
 
 
@@ -2699,6 +2716,14 @@ class App extends Component {
       },
 
 
+      {
+        "name": null,
+        "description": "END: Epidemiologic Lab Interpretative questions repeating group - Mother's Most Recent Non-treponemal Test Finding/Information [2nd instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 0,
+        "mappings": []
+      },
+
 
 
 
@@ -2852,7 +2877,13 @@ class App extends Component {
         ]
       },
 
-
+      {
+        "name": null,
+        "description": "END: Epidemiologic Lab Interpretative questions repeating group - Mother's First Treponemal Test Finding [3rd instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 0,
+        "mappings": []
+      },
 
 
 
@@ -3005,7 +3036,13 @@ class App extends Component {
         ]
       },
 
-
+      {
+        "name": null,
+        "description": "END: Epidemiologic Lab Interpretative questions repeating group - Mother's Most Recent Treponemal Test Finding [4th instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 0,
+        "mappings": []
+      },
 
 
 
@@ -3159,7 +3196,13 @@ class App extends Component {
         ]
       },
 
-
+      {
+        "name": null,
+        "description": "END: Epidemiologic Lab Interpretative questions repeating group - Infant's Non-treponemal Test Finding [5th instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 0,
+        "mappings": []
+      },
 
 
 
