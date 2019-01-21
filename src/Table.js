@@ -21,27 +21,37 @@ const TableBody = (props) => {
     }
 
     const rows = props.messageMappingGuide.elements.map((row, index) => {
-        return (
+
+        if (row.dataType !== 'None') {
+            return (
+                <tr style={row.dataType !== 'None' ? {} : headerRowStyle } key={index}>
+                    <td>{row.legacyVariableName ? index + 1 : "" }</td>
+                    <td>{row.legacyVariableName}</td>
+                    <td>{row.name}</td>
+                    <td>{row.identifier}</td>
+                    <td>{row.codeSystem}</td>
+                    <td>{row.description}</td>
+                    <td>{row.dataType}</td>
+                    <td>{row.priority}</td>
+                    <td>{row.repetitions <= 1 ? "N" : "Y" }</td>
+                    <td>{row.data && row.data.length > 0 ? row.data[0] : ""}</td>
+                    <td>{row.data && row.data.length > 1 ? row.data[1] : ""}</td>
+                    <td>{row.data && row.data.length > 2 ? row.data[2] : ""}</td>
+                    <td>{row.data && row.data.length > 3 ? row.data[3] : ""}</td>
+                    <td>{row.data && row.data.length > 4 ? row.data[4] : ""}</td>
+                    <td>{row.data && row.data.length > 5 ? row.data[5] : ""}</td>
+                    <td>{row.data && row.data.length > 6 ? row.data[6] : ""}</td>
+                    <td>{row.data && row.data.length > 7 ? row.data[7] : ""}</td>
+                </tr>
+            );
+        }
+        else {
+            return (
             <tr style={row.dataType !== 'None' ? {} : headerRowStyle } key={index}>
-                <td>{row.legacyVariableName ? index + 1 : "" }</td>
-                <td>{row.legacyVariableName}</td>
-                <td>{row.name}</td>
-                <td>{row.identifier}</td>
-                <td>{row.codeSystem}</td>
-                <td>{row.description}</td>
-                <td>{row.dataType}</td>
-                <td>{row.priority}</td>
-                <td>{row.repetitions <= 1 ? "N" : "Y" }</td>
-                <td>{row.data && row.data.length > 0 ? row.data[0] : ""}</td>
-                <td>{row.data && row.data.length > 1 ? row.data[1] : ""}</td>
-                <td>{row.data && row.data.length > 2 ? row.data[2] : ""}</td>
-                <td>{row.data && row.data.length > 3 ? row.data[3] : ""}</td>
-                <td>{row.data && row.data.length > 4 ? row.data[4] : ""}</td>
-                <td>{row.data && row.data.length > 5 ? row.data[5] : ""}</td>
-                <td>{row.data && row.data.length > 6 ? row.data[6] : ""}</td>
-                <td>{row.data && row.data.length > 7 ? row.data[7] : ""}</td>
+                <td colspan="17">{row.description}</td>
             </tr>
-        );
+            );
+        }
     });
 
     return (

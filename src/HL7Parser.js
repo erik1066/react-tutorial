@@ -5,18 +5,58 @@ class HL7Parser {
         const elements = messageMappingGuide.elements;
 
         const segments = normalizedMessage.split("\n");
-        const repeats = this.getRepeatingElements(segments);
+        this.addBlockDefinitions(elements);
+        const repeats = this.getRepeatingElements(segments, messageMappingGuide);        
 
         elements.forEach(element => {
             if (!element.data) {
                 element.data = [];
             }
             if (element.dataType !== "None") {
-                const data = this.findSegmentData(element, normalizedMessage, repeats, messageMappingGuide);
-                          
+                const data = this.findSegmentData(element, normalizedMessage, repeats, messageMappingGuide);                          
                 element.data.push(data.friendlyValue);
             }
         });
+    }
+
+    addBlockDefinitions(elements) {
+
+        const blocks = new Map();
+
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+
+            if (element.dataType === "None" && element.id && element.repetitions && element.repetitions > 1) {
+                blocks.set(element.id, element);
+            }
+        }
+
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+
+            if (element.dataType !== "None" && element.blockId) {
+                const block = blocks.get(element.blockId);
+                if (!block.elements) {
+                    block.elements = [];                    
+                }
+
+                // does block have this element already?
+                let found = false;
+                for (let j = 0; j < block.elements.length; j++) {
+                    if (block.elements[j].id === element.id) {
+                        found = true;
+                    }
+                }
+
+                if (!found) {
+                    block.elements.push(element);
+                }
+                
+                element.block = block;
+            }
+        }
+
+        return blocks;
     }
 
     findSegmentData(element, message, repeats, messageMappingGuide) {
@@ -47,8 +87,8 @@ class HL7Parser {
                     break;
                 }
             }
-            if (data) {                    
-                segmentData.value = data;                
+            if (data) {
+                segmentData.value = data;
                 repeats.splice(index, 1);
             }
         }
@@ -104,27 +144,79 @@ class HL7Parser {
         return segmentData;
     }
 
-    getRepeatingElements(segments) {
-        const repeatingElements = [];//new Map();
+    getRepeatingElements(segments, messageMappingGuide) {
+        const repeatingElements = [];
+        const obx4BlockMap = new Map();
 
         for (let i = 0; i < segments.length; i++) {
-            const segment = segments[i];
+            let segment = segments[i];
             
             // only OBX segments can be part of a repeating block
             if (segment.startsWith("OBX")) {
 
-                const fields = segment.split('|');
+                let fields = segment.split('|');
                 if (fields[3] && fields[3].length > 0 && fields[4] && fields[4].length > 0) {
+                    const elementId = fields[3].split('^')[0];
+                    const element = this.getElementByObx3(elementId, messageMappingGuide);
+                    const block = element.block;
+
                     const kvp = {
                         id: fields[4] + "%%%" + fields[3],
                         obx3: fields[3],
                         obx4: fields[4],
+                        instance: fields[4],
+                        block: block,
+                        element: element,
                         segment: segment
                     };
 
                     repeatingElements.push(kvp);//set(kvp.id, kvp);
+
+                    obx4BlockMap.set(fields[4], block);
                 }
             }
+        }
+
+        const newElementsToAdd = [];
+
+        // fill in any missing values
+        for (var [key, value] of obx4BlockMap) {
+            
+            let block = value;
+
+            for (let i = 0; i < block.elements.length; i++) {
+                let element = block.elements[i];
+                
+                let found = false;
+                // find if there's a matching repeating thingy
+                for (let j = 0; j < repeatingElements.length; j++) {
+                    let re = repeatingElements[j];
+
+                    if (re.id.startsWith(key + "%%%" + element.identifier)) {
+                        found = true;
+                    }
+                }
+
+                if (!found) {
+                    let obx3 = element.identifier + "^" + element.name + "^" + element.codeSystem;
+                    let kvp = {
+                        id: key + "%%%" + obx3,
+                        obx3: obx3,
+                        obx4: key,
+                        instance: key,
+                        block: block,
+                        element: element,
+                        segment: "OBX|||" + obx3 + "|" + key + "| |||||||||"
+                    };
+
+                    newElementsToAdd.push(kvp);
+                }
+            }
+        }
+
+        for (let i = 0; i < newElementsToAdd.length; i++) {
+            let newElement = newElementsToAdd[i];
+            repeatingElements.push(newElement);
         }
 
         repeatingElements.sort((a, b) => {
@@ -142,20 +234,30 @@ class HL7Parser {
         return repeatingElements;
     }
 
+    getElementByObx3(identifier, messageMappingGuide) {
+        const elements = messageMappingGuide.elements;
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            if (element.mappings && element.mappings.length > 0 && element.mappings[0].segmentType === "OBX" && element.identifier === identifier) {
+                return element;
+            }
+        }
+        return null;
+    }
+
     getElementById(id, messageMappingGuide) {
         const elements = messageMappingGuide.elements;
-
         for (let i = 0; i < elements.length; i++) {
             const element = elements[i];
             if (element.id && element.id === id) {
                 return element;
             }
         }
-
         return null;
     }
 
     generateFriendlyValue(element, value) {
+
         const mapping = element.mappings[0];
         let friendlyValue = "<N/A>";
 
@@ -165,7 +267,12 @@ class HL7Parser {
 
         if (mapping.dataType === "CWE" || mapping.dataType === "CE") {
             const components = value.split('^');
-            friendlyValue = components[0] + "=" + components[1];
+            if (components.length > 1) {
+                friendlyValue = components[0] + "=" + components[1];
+            }
+            else {
+                return friendlyValue;
+            }
         }
         else if (mapping.dataType === "SN") {
             const components = value.split('^');

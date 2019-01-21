@@ -15,12 +15,9 @@ class App extends Component {
         "id": "5ba813c4-3c27-451d-83af-d8881953588a",
         "name": null,
         "description": "Message Header",
-        "legacyVariableName": null,
-        "identifier": null,
-        "codeSystem": null,
         "dataType": "None",
         "priority": 0,
-        "repetitions": 0,
+        "repetitions": 1,
         "relatedElementId": null,
         "mappings": []
       },
@@ -954,19 +951,15 @@ class App extends Component {
         "id": "eac0fcf3-a9e3-4e4a-a731-ec223c4b2ceb",
         "name": null,
         "description": "Repeating Variables for Disease Exposure",
-        "legacyVariableName": null,
-        "identifier": null,
-        "codeSystem": null,
         "dataType": "None",
-        "priority": 0,
-        "repetitions": 0,
-        "relatedElementId": null,
+        "repetitions": 100,
         "mappings": []
       },
       {
         "id": "2cc47e98-8212-4ef1-948a-1e2fcf7309ca",
         "name": "Country of Exposure",
         "description": "Country of Exposure",
+        "blockId": "eac0fcf3-a9e3-4e4a-a731-ec223c4b2ceb",
         "legacyVariableName": "INV502",
         "identifier": "77984-3",
         "codeSystem": "LN",
@@ -992,6 +985,7 @@ class App extends Component {
         "id": "cd308f98-95c1-4d93-a9bd-52335c3d3486",
         "name": "State or Province of Exposure",
         "description": "State or Province of Exposure",
+        "blockId": "eac0fcf3-a9e3-4e4a-a731-ec223c4b2ceb",
         "legacyVariableName": "INV503",
         "identifier": "77985-0",
         "codeSystem": "LN",
@@ -1017,6 +1011,7 @@ class App extends Component {
         "id": "40e12cd8-156e-4205-9073-173bce6aef74",
         "name": "City of Exposure",
         "description": "City of Exposure",
+        "blockId": "eac0fcf3-a9e3-4e4a-a731-ec223c4b2ceb",
         "legacyVariableName": "INV504",
         "identifier": "77986-8",
         "codeSystem": "LN",
@@ -1042,6 +1037,7 @@ class App extends Component {
         "id": "7cbc5158-8d8e-4a07-92d8-81186115b0b1",
         "name": "County of Exposure",
         "description": "County of Exposure",
+        "blockId": "eac0fcf3-a9e3-4e4a-a731-ec223c4b2ceb",
         "legacyVariableName": "INV505",
         "identifier": "77987-6",
         "codeSystem": "LN",
@@ -2403,29 +2399,30 @@ class App extends Component {
           }
         ]
       },
+
+
+
+
       {
         "id": "4a79876d-b221-4c39-bfec-c59890289af9",
         "name": null,
-        "description": "START: Epidemiologic Lab Interpretative questions repeating group (Mother and Infant)",
-        "legacyVariableName": null,
-        "identifier": null,
-        "codeSystem": null,
+        "description": "START: Epidemiologic Lab Interpretative questions repeating group - Mother's First Non-Treponemal Test Finding/Information [1st instance of repeating group]",
         "dataType": "None",
-        "priority": 0,
-        "repetitions": 0,
-        "relatedElementId": null,
+        "repetitions": 100,
         "mappings": []
       },
       {
         "id": "993681c4-2e95-4c6a-a4e1-325082051d5d",
         "name": "Lab Test Performed Modifier",
         "description": "Lab Test Performed Modifier",
-        "legacyVariableName": "",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB588",
         "identifier": "LAB588",
         "codeSystem": "PHINQUESTION",
         "dataType": "Coded",
         "priority": "P",
         "repetitions": 1,
+        "instance": 1,
         "relatedElementId": null,
         "mappings": [
           {
@@ -2445,12 +2442,14 @@ class App extends Component {
         "id": "46235f48-c656-4118-9589-cfbbc8b4d65b",
         "name": "Test Type",
         "description": "Test Type",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
         "legacyVariableName": "INV290",
         "identifier": "INV290",
         "codeSystem": "PHINQUESTION",
         "dataType": "Coded",
         "priority": "P",
         "repetitions": 1,
+        "instance": 1,
         "relatedElementId": null,
         "mappings": [
           {
@@ -2470,12 +2469,14 @@ class App extends Component {
         "id": "ce95e33c-b803-4428-bd19-99e58bde8945",
         "name": "Test Result",
         "description": "Test Result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
         "legacyVariableName": "INV291",
         "identifier": "INV291",
         "codeSystem": "PHINQUESTION",
         "dataType": "Coded",
         "priority": "P",
         "repetitions": 1,
+        "instance": 1,
         "relatedElementId": null,
         "mappings": [
           {
@@ -2495,12 +2496,14 @@ class App extends Component {
         "id": "d6a1d582-baf1-46b8-923f-d4b901012f17",
         "name": "Nontreponemal serologic syphilis test result",
         "description": "Nontreponemal serologic syphilis test result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
         "legacyVariableName": "STD123",
         "identifier": "STD123",
         "codeSystem": "PHINQUESTION",
         "dataType": "Coded",
         "priority": "P",
         "repetitions": 1,
+        "instance": 1,
         "relatedElementId": null,
         "mappings": [
           {
@@ -2520,12 +2523,14 @@ class App extends Component {
         "id": "140693c4-ba0e-450e-a896-c524698bb98a",
         "name": "Date of lab result",
         "description": "Date of lab result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
         "legacyVariableName": "LAB167",
         "identifier": "82772-5",
         "codeSystem": "LN",
         "dataType": "Date",
         "priority": "P",
         "repetitions": 1,
+        "instance": 1,
         "relatedElementId": null,
         "mappings": [
           {
@@ -2541,6 +2546,623 @@ class App extends Component {
           }
         ]
       },
+
+
+
+
+
+
+
+
+      {
+        "id": "4a79876d-b221-4c39-bfec-c59890289af9",
+        "name": null,
+        "description": "START: Epidemiologic Lab Interpretative questions repeating group - Mother's Most Recent Non-treponemal Test Finding/Information [2nd instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 100,
+        "mappings": []
+      },
+      {
+        "id": "993681c4-2e95-4c6a-a4e1-325082051d5d",
+        "name": "Lab Test Performed Modifier",
+        "description": "Lab Test Performed Modifier",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB588",
+        "identifier": "LAB588",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 2,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "PRIMARY/PARENT",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "46235f48-c656-4118-9589-cfbbc8b4d65b",
+        "name": "Test Type",
+        "description": "Test Type",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "INV290",
+        "identifier": "INV290",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 2,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "PRIMARY/PARENT",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "ce95e33c-b803-4428-bd19-99e58bde8945",
+        "name": "Test Result",
+        "description": "Test Result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "INV291",
+        "identifier": "INV291",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 2,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "d6a1d582-baf1-46b8-923f-d4b901012f17",
+        "name": "Nontreponemal serologic syphilis test result",
+        "description": "Nontreponemal serologic syphilis test result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "STD123",
+        "identifier": "STD123",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 2,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "140693c4-ba0e-450e-a896-c524698bb98a",
+        "name": "Date of lab result",
+        "description": "Date of lab result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB167",
+        "identifier": "82772-5",
+        "codeSystem": "LN",
+        "dataType": "Date",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 2,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "DT",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+
+
+
+
+
+
+
+
+
+
+
+      {
+        "id": "4a79876d-b221-4c39-bfec-c59890289af9",
+        "name": null,
+        "description": "START: Epidemiologic Lab Interpretative questions repeating group - Mother's First Treponemal Test Finding [3rd instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 100,
+        "mappings": []
+      },
+      {
+        "id": "993681c4-2e95-4c6a-a4e1-325082051d5d",
+        "name": "Lab Test Performed Modifier",
+        "description": "Lab Test Performed Modifier",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB588",
+        "identifier": "LAB588",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 3,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "PRIMARY/PARENT",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "46235f48-c656-4118-9589-cfbbc8b4d65b",
+        "name": "Test Type",
+        "description": "Test Type",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "INV290",
+        "identifier": "INV290",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 3,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "PRIMARY/PARENT",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "ce95e33c-b803-4428-bd19-99e58bde8945",
+        "name": "Test Result",
+        "description": "Test Result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "INV291",
+        "identifier": "INV291",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 3,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "d6a1d582-baf1-46b8-923f-d4b901012f17",
+        "name": "Nontreponemal serologic syphilis test result",
+        "description": "Nontreponemal serologic syphilis test result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "STD123",
+        "identifier": "STD123",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 3,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "140693c4-ba0e-450e-a896-c524698bb98a",
+        "name": "Date of lab result",
+        "description": "Date of lab result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB167",
+        "identifier": "82772-5",
+        "codeSystem": "LN",
+        "dataType": "Date",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 3,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "DT",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+
+
+
+
+
+
+
+
+
+
+      {
+        "id": "4a79876d-b221-4c39-bfec-c59890289af9",
+        "name": null,
+        "description": "START: Epidemiologic Lab Interpretative questions repeating group - Mother's Most Recent Treponemal Test Finding [4th instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 100,
+        "mappings": []
+      },
+      {
+        "id": "993681c4-2e95-4c6a-a4e1-325082051d5d",
+        "name": "Lab Test Performed Modifier",
+        "description": "Lab Test Performed Modifier",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB588",
+        "identifier": "LAB588",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 4,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "PRIMARY/PARENT",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "46235f48-c656-4118-9589-cfbbc8b4d65b",
+        "name": "Test Type",
+        "description": "Test Type",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "INV290",
+        "identifier": "INV290",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 4,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "PRIMARY/PARENT",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "ce95e33c-b803-4428-bd19-99e58bde8945",
+        "name": "Test Result",
+        "description": "Test Result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "INV291",
+        "identifier": "INV291",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 4,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "d6a1d582-baf1-46b8-923f-d4b901012f17",
+        "name": "Nontreponemal serologic syphilis test result",
+        "description": "Nontreponemal serologic syphilis test result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "STD123",
+        "identifier": "STD123",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 4,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "140693c4-ba0e-450e-a896-c524698bb98a",
+        "name": "Date of lab result",
+        "description": "Date of lab result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB167",
+        "identifier": "82772-5",
+        "codeSystem": "LN",
+        "dataType": "Date",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 4,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "DT",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+
+
+
+
+
+
+
+
+
+
+
+      {
+        "id": "4a79876d-b221-4c39-bfec-c59890289af9",
+        "name": null,
+        "description": "START: Epidemiologic Lab Interpretative questions repeating group - Infant's Non-treponemal Test Finding [5th instance of repeating group]",
+        "dataType": "None",
+        "repetitions": 100,
+        "mappings": []
+      },
+      {
+        "id": "993681c4-2e95-4c6a-a4e1-325082051d5d",
+        "name": "Lab Test Performed Modifier",
+        "description": "Lab Test Performed Modifier",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB588",
+        "identifier": "LAB588",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 5,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "PRIMARY/PARENT",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "46235f48-c656-4118-9589-cfbbc8b4d65b",
+        "name": "Test Type",
+        "description": "Test Type",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "INV290",
+        "identifier": "INV290",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 5,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "PRIMARY/PARENT",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "ce95e33c-b803-4428-bd19-99e58bde8945",
+        "name": "Test Result",
+        "description": "Test Result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "INV291",
+        "identifier": "INV291",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 5,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "d6a1d582-baf1-46b8-923f-d4b901012f17",
+        "name": "Nontreponemal serologic syphilis test result",
+        "description": "Nontreponemal serologic syphilis test result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "STD123",
+        "identifier": "STD123",
+        "codeSystem": "PHINQUESTION",
+        "dataType": "Coded",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 5,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "CWE",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+      {
+        "id": "140693c4-ba0e-450e-a896-c524698bb98a",
+        "name": "Date of lab result",
+        "description": "Date of lab result",
+        "blockId" : "4a79876d-b221-4c39-bfec-c59890289af9",
+        "legacyVariableName": "LAB167",
+        "identifier": "82772-5",
+        "codeSystem": "LN",
+        "dataType": "Date",
+        "priority": "P",
+        "repetitions": 1,
+        "instance": 5,
+        "relatedElementId": null,
+        "mappings": [
+          {
+            "obrParent": 1,
+            "segmentType": "OBX",
+            "fieldPosition": 5,
+            "componentPosition": -1,
+            "dataType": "DT",
+            "usage": "RE",
+            "cardinality": "[0..1]",
+            "repeatingGroupElement": "CHILD",
+            "name": "hl7-v251-oru-r01"
+          }
+        ]
+      },
+
+
+
+
+
       {
         "id": "aad6513a-5471-433b-a701-3c8857df4dfa",
         "name": null,
