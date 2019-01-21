@@ -22,7 +22,7 @@ const TableBody = (props) => {
 
     const rows = props.messageMappingGuide.elements.map((row, index) => {
         return (
-            <tr style={row.legacyVariableName ? {} : headerRowStyle } key={index}>
+            <tr style={row.dataType !== 'None' ? {} : headerRowStyle } key={index}>
                 <td>{row.legacyVariableName ? index + 1 : "" }</td>
                 <td>{row.legacyVariableName}</td>
                 <td>{row.name}</td>

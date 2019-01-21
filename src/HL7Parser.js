@@ -11,7 +11,7 @@ class HL7Parser {
             if (!element.data) {
                 element.data = [];
             }
-            if (element.dataType !== "Header") {
+            if (element.dataType !== "None") {
                 const data = this.findSegmentData(element, normalizedMessage, repeats, messageMappingGuide);
                           
                 element.data.push(data.friendlyValue);
@@ -24,7 +24,7 @@ class HL7Parser {
         const identifier = element.identifier;
         const segments = message.split("\n");
         
-        let data = null;
+        var data = null;
 
         const segmentData = {
             name: element.name,
@@ -54,14 +54,14 @@ class HL7Parser {
         }
         else {
             for (let i = 0; i < segments.length; i++) {
-                const segment = segments[i];
+                var segment = segments[i];
 
                 if (segment.startsWith(segmentType)) {
-                    const fields = segment.split('|');
+                    var fields = segment.split('|');
 
                     if (segmentType === "OBX" && fieldPosition === 5) {
                         let obx3value = fields[3];
-                        const obx3components = obx3value.split('^');
+                        var obx3components = obx3value.split('^');
                         if (identifier === obx3components[0]) {
                             data = fields[5];
                         }
@@ -72,17 +72,23 @@ class HL7Parser {
                         const relatedElementIdentifier = relatedElement.identifier;
                         
                         let obx3value = fields[3];
-                        const obx3components = obx3value.split('^');
+                        var obx3components = obx3value.split('^');
                         
                         if (relatedElementIdentifier === obx3components[0]) {
                             data = fields[fieldPosition];
                         }
                     }
                     else if (segmentType !== "OBX") {
-                        data = fields[fieldPosition];
 
-                        if (componentPosition) {
-                            const components = data.split('^');
+                        if (segmentType === "MSH") {
+                            data = fields[fieldPosition - 1];
+                        }
+                        else {
+                            data = fields[fieldPosition];
+                        }
+
+                        if (componentPosition && componentPosition >= 0) {
+                            var components = data.split('^');
                             data = components[componentPosition - 1];                            
                         }
                     }
