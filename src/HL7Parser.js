@@ -4,7 +4,10 @@ class HL7Parser {
         const normalizedMessage = message.replace(/(\r\n\t|\n|\r\t|\r)/gm, "\n"); // normalize line terminators
         const elements = messageMappingGuide.elements;
 
-        const segments = normalizedMessage.split("\n");
+        let segments = normalizedMessage.split("\n");
+        segments = this.removeLabTemplateSegments(segments);
+        
+
         this.addBlockDefinitions(elements);
         const repeats = this.getRepeatingElements(segments, messageMappingGuide);        
 
@@ -19,12 +22,28 @@ class HL7Parser {
         });
     }
 
+    removeLabTemplateSegments(segments) {
+        
+        const filteredSegments = [];
+
+        for (let i = 0; i < segments.length; i++) {
+            if (segments[i].startsWith("OBR|2|")) {
+                break;
+            }
+            else {
+                filteredSegments.push(segments[i]);
+            }
+        }
+
+        return filteredSegments;
+    }
+
     addBlockDefinitions(elements) {
 
         const blocks = new Map();
 
         for (let i = 0; i < elements.length; i++) {
-            const element = elements[i];
+            let element = elements[i];
 
             if (element.dataType === "None" && element.id && element.repetitions && element.repetitions > 1) {
                 blocks.set(element.id, element);
@@ -32,27 +51,29 @@ class HL7Parser {
         }
 
         for (let i = 0; i < elements.length; i++) {
-            const element = elements[i];
+            let element = elements[i];
 
             if (element.dataType !== "None" && element.blockId) {
-                const block = blocks.get(element.blockId);
-                if (!block.elements) {
-                    block.elements = [];                    
-                }
-
-                // does block have this element already?
-                let found = false;
-                for (let j = 0; j < block.elements.length; j++) {
-                    if (block.elements[j].id === element.id) {
-                        found = true;
+                let block = blocks.get(element.blockId);
+                if (block) { // TODO: Check to see why Mumps TC01 has a bad block here?
+                    if (!block.elements) {
+                        block.elements = [];                    
                     }
-                }
 
-                if (!found) {
-                    block.elements.push(element);
+                    // does block have this element already?
+                    let found = false;
+                    for (let j = 0; j < block.elements.length; j++) {
+                        if (block.elements[j].id === element.id) {
+                            found = true;
+                        }
+                    }
+
+                    if (!found) {
+                        block.elements.push(element);
+                    }
+                    
+                    element.block = block;
                 }
-                
-                element.block = block;
             }
         }
 
@@ -183,6 +204,8 @@ class HL7Parser {
         for (var [key, value] of obx4BlockMap) {
             
             let block = value;
+
+            if (!block) continue;
 
             for (let i = 0; i < block.elements.length; i++) {
                 let element = block.elements[i];
